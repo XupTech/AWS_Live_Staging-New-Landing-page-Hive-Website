@@ -1,0 +1,40 @@
+<div class="tskr_prof_dtls">
+    <div class="container">
+        <div class="tskr_rgstrn_outer_cont">
+            <div class="tskr_prof_dtls_inner">
+                <div class="tskr_prof_dtls_bx">
+                    <div class="tskr_prof_dtls_hdr">
+                        <div class="tskr_prof_dtls_bx_lft">
+                            <div class="tskr_prof_dtls_tle">
+                               {{'DOCUMENT LIST' | translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field abouts">
+                        <form name="documenttaskerForm" role="form" submit-validate novalidate>
+                            <div class="about-fields docu-list">
+                                <div class="col-md-12 col-xs-12">
+                                    <!-- <div class="form-group">                                       
+                                    </div> -->
+                                     <div ng-if = "ADTC.currenttassker.doc" class="doc-add">                        
+                                        <ul>
+                                            <li ng-repeat="docs in ADTC.currenttassker.doc">
+                                              <span class="snumber"><p>{{ $index + 1 }}.</p></span>
+                                              <span class=""><p>{{docs.name}}</p></span>
+                                              <span class="" ng-if="docs.file_type == 'image/jpeg' || docs.file_type == 'image/png' || docs.file_type == 'image/jpg'"> <img ng-src="{{docs.path}}" height="100" width="100"></img></span>
+                                               <span class="" ng-if="docs.file_type == 'application/pdf'"><img src="uploads/default/pdf.png" height="100" width="100"></img></span>
+                                               <span class="" ng-if="docs.file_type == 'application/octet-stream'"><img src="uploads/default/doc.png" height="100" width="100"></img></span>
+                                               <span class="list-btn"> <a href="{{docs.path}}" target="_blank" class="btn btn-secondary js-deactivate-trigger confrm conform" style="width:80px;">{{'VIEW'|translate }}</a></span>
+                                               <span class="list-btn"> <a href="javascript:void(0)" ng-click="ADTC.showEditForm(docs)" class="btn btn-secondary js-deactivate-trigger confrm conform" style="width:80px;">{{'CHANGE'|translate }}</a></span>
+                                            </li>
+                                        </ul>
+                                     </div>
+                                </div>
+                            </div>                           
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

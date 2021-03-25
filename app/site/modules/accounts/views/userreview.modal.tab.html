@@ -1,0 +1,24 @@
+<form name="Userreview" submit-validate novalidate>
+<div class="modal-header">
+    <h3 class="modal-title">{{'REVIEW'|translate }}</h3>
+</div>
+<div class="modal-body">
+   <div class="form-group">
+        <label for="line1">{{'RATE YOUR TASKER FOR THIS TASK'|translate }} ? </label></br>
+        <uib-rating name="rating" ng-model="ARM.review.rating" max="5" state-on="'fa fa-star text-orange text-lg'" state-off="'fa fa-star-o text-lg'"  on-blur-validation required ></uib-rating>
+        <p style="color:red" class="help-block" ng-show="Userreview.rating.$invalid && !Userreview.rating.$pristine && Userreview.rating.$error.required">{{'RATING IS REQUIRED' | translate}}</p>
+    </div>
+    <div class="form-group" >
+        <label for="line1">{{'COMMENTS'|translate }}</label>
+        <textarea type="text" class="form-control" ng-model="ARM.review.comments" ng-maxlength="200" name="comment"   on-blur-validation required ></textarea>
+        <p style="color:red" ng-show="Userreview.comment.$invalid && !Userreview.comment.$pristine && !Userreview.comment.$error.required" class="help-block">{{'RATING COMMENT SHOULD BE MIN 200 CHAR' | translate}}</p>
+        <p style="color:red" ng-show="Userreview.comment.$error.required && !Userreview.comment.$pristine" class="help-block">{{'COMMENT IS REQUIRED' | translate}}</p>
+		
+    </div>
+</div>
+
+<div class="modal-footer">
+ <button class="btn btn-primary" type="submit" ng-click="ARM.ok(Userreview.$valid)">{{'OK'|translate }}</button>
+    <button class="btn btn-warning" type="submit" ng-click="ARM.cancel()">{{'CANCEL'|translate }}</button>
+</div>
+</form>

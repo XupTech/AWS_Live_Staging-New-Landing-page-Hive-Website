@@ -1,0 +1,52 @@
+{
+    "port": "3003",
+    "mongodb": {
+        "host": "localhost",
+        "port": "27017",
+        "database": "MongJayAflak",
+        "username": "admin",
+        "password": "admin"
+    },
+    "settings": {
+        "wallet": {
+            "amount": {
+                "minimum": "10",
+                "maximum": "1000",
+                "welcome": "50"
+            },
+            "status": "1"
+        },
+        "site_title": "HandyForAll",
+        "site_url": "http://localhost:3006",
+        "location": "Chennai Theni Hwy, Ganapathipuram, Tambaram, Chennai, Tamil Nadu, India",
+        "siteaddress": "D.84, Block No.3, 4th Floor, Murugesa Nayakar Complex, Greams Rd, Thousand Lights, Chennai, Tamil Nadu 600006",
+        "email_address": "handyforall@yopmail.com",
+        "admin_commission": "0",
+        "minimum_amount": "300",
+        "service_tax": "0",
+        "billingcycle": "6",
+        "accepttime": "10",
+        "minaccepttime": "7",
+        "distanceby": "km",
+        "bookingIdPrefix": "HFA",
+        "time_zone": "America/Inuvik",
+        "date_format": "DD/MM/YYYY",
+        "time_format": "hh:mm a",
+        "pay_by_cash": {
+            "status": "1"
+        },
+        "referral": {
+            "status": "1",
+            "amount": {
+                "referral": "5000",
+                "referrer": "35"
+            }
+        },
+        "categorycommission": {
+            "status": "1"
+        },
+        "logo": "uploads/images/others/1525776566319.png",
+        "light_logo": "uploads/images/others/1525776566320.png",
+        "favicon": "uploads/images/others/1525776566320.png"
+    }
+}

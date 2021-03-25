@@ -1,0 +1,8 @@
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+  <string name="LOGIN">S'identifier</string>
+  <string name="SIGN UP">S'inscrire</string>
+  <string name="MESSAGES">messages</string>
+  <string name="NOTIFICATIONS">Les notifications</string>
+  <string name="MY ACCOUNT">Mon compte</string>
+  <string name="LOG OUT">Se déconnecter</string>
+</resources>

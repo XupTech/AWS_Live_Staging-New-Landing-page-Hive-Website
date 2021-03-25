@@ -1,0 +1,298 @@
+<style>
+    .def_relative {
+        position: relative;
+    }
+
+    .lab_el_13 {
+        display: inline-block;
+        width: 26%;
+    }
+</style>
+<section>
+    <input type="hidden" name="taskid" ng-model="CDC.taskPayment.taskid" value="{{CDC.data._id}}">
+    <div class="hirestep3 card-dtl mke-pay">
+        <div class="container2">
+            <div class="hirestp3holder">
+                <h1 class="confbook-text"> <span class="bk-id">{{'BOOKINGID'|translate}}:</span> {{CDC.data.booking_id}}
+                </h1>
+                <div class="conf-divs tsk-dtls">
+                    <h3>{{'TASK SUMMARY' | translate}}</h3>
+                    <div class="conf-white def_relative">
+                        <div class="form-group cl-rgt-dtls">
+                            <div class="leftartr-img img_profile_select">
+                                <figure>
+                                    <img ng-if="CDC.data.tasker.avatar" ng-src="{{CDC.data.tasker.avatar}}" err-src
+                                        style="height:100%;width:100%;">
+                                    <img ng-if="CDC.data.tasker.avatar  ==''" style="height:100%;width:100%;"
+                                        alt="empty" err-src>
+                                </figure>
+                            </div>
+                        </div>
+                        <div class="col-lft-dtls">
+                            <div class="form-group">
+                                <label for="line1"> <span class="lab_el_12"> {{'TASK CATEGORY'|translate}} :</span>
+                                </label>
+                                <p>{{CDC.data.booking_information.service_type}}</p>
+                                </br>
+                            </div>
+                            <div class="form-group">
+                                <label for="line1"> <span class="lab_el_12"> {{'TASKER NAME'|translate}} :</span>
+                                </label>
+                                <p>{{CDC.data.tasker.username}}</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="line1"><span class="lab_el_12"> {{'TASK DATE/DAY'|translate}} :</span>
+                                </label>
+                                <p>{{CDC.data.task_date}} / {{CDC.data.task_day}}</p>
+                                </br>
+                            </div>
+                            <div class="form-group amt-tag"
+                                ng-if="CDC.data.invoice.amount.total && !CDC.data.invoice.amount.extra_amount">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'TASK AMOUNT'|translate}} :</span>
+                                </label>
+                                <p> <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}}
+                                    {{(CDC.data.invoice.amount.total) * rc.DefaultCurrency.value | number:2}}</p>
+                            </div>
+                            <div class="form-group amt-tag"
+                                ng-if="CDC.data.invoice.amount.total && CDC.data.invoice.amount.extra_amount">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'TASK AMOUNT'|translate}}
+                                        ({{'INCL'|translate }}.{{'MATERIAL FEE'|translate }}):</span>
+                                </label>
+                                <p> <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}}
+                                    {{(CDC.data.invoice.amount.total + CDC.data.invoice.amount.extra_amount) * rc.DefaultCurrency.value | number:2}}
+                                </p>
+                                <!--<p ng-if="CDC.couponbtn == 0"> <span class="lab_el_12" ng-if="CDC.couponbtn == 0"></span> {{rc.DefaultCurrency.symbol}}  {{CDC.grandtotal  * rc.DefaultCurrency.value | number:2}}</p>-->
+                            </div>
+                            <div class="form-group amt-tag" ng-if="CDC.data.invoice.amount.service_tax">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'SERVICE TAX'|translate}} :</span>
+                                </label>
+                                <p> <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}} {{CDC.service_tax * rc.DefaultCurrency.value
+                                    | number:2}}</p>
+                                <!--<p ng-if="CDC.couponbtn == 0"> <span class="lab_el_12" ng-if="CDC.couponbtn == 0"></span> {{rc.DefaultCurrency.symbol}}  {{CDC.grandtotal  * rc.DefaultCurrency.value | number:2}}</p>-->
+                            </div>
+                            <!-- <div class="form-group amt-tag" ng-if="CDC.data.invoice.amount.extra_amount">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'MISCELLANEOUS'|translate}} :</span>
+                                </label>
+                                <p> <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}} {{CDC.data.invoice.amount.extra_amount
+                                    * rc.DefaultCurrency.value | number:2}}</p>
+                                <p ng-if="CDC.couponbtn == 0"> <span class="lab_el_12" ng-if="CDC.couponbtn == 0"></span> {{rc.DefaultCurrency.symbol}}  {{CDC.grandtotal  * rc.DefaultCurrency.value | number:2}}</p>
+                            </div> -->
+                            <div class="form-group amt-tag" ng-if="CDC.data.invoice.amount.total">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'TOTAL'|translate}} :</span>
+                                </label>
+                                <p ng-if="!CDC.data.invoice.amount.extra_amount"> <span class="lab_el_12"></span>
+                                    {{rc.DefaultCurrency.symbol}} {{(CDC.data.invoice.amount.total + CDC.service_tax)
+                                    * rc.DefaultCurrency.value | number:2}}</p>
+                                <p ng-if="CDC.data.invoice.amount.extra_amount"> <span class="lab_el_12"></span>
+                                    {{rc.DefaultCurrency.symbol}} {{(CDC.data.invoice.amount.total + CDC.data.invoice.amount.extra_amount + CDC.service_tax)
+                                   * rc.DefaultCurrency.value | number:2}}</p>
+                                <!--<p ng-if="CDC.couponbtn == 0"> <span class="lab_el_12" ng-if="CDC.couponbtn == 0"></span> {{rc.DefaultCurrency.symbol}}  {{CDC.grandtotal  * rc.DefaultCurrency.value | number:2}}</p>-->
+                            </div>
+                            <div class="form-group amt-tag" ng-if="CDC.data.invoice.amount.coupon">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'COUPON'|translate}} :</span>
+                                </label>
+                                <p> <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}} {{CDC.data.invoice.amount.coupon * rc.DefaultCurrency.value
+                                    | number:2}}</p>
+                                <!--<p ng-if="CDC.couponbtn == 0"> <span class="lab_el_12" ng-if="CDC.couponbtn == 0"></span> {{rc.DefaultCurrency.symbol}}  {{CDC.grandtotal  * rc.DefaultCurrency.value | number:2}}</p>-->
+                            </div>
+                            <div class="form-group amt-tag" ng-if="CDC.data.invoice.amount.coupon">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'TOTAL AMOUNT AFTER DISCOUNT'|translate}} :</span>
+                                </label>
+                                <p ng-if="CDC.data.invoice.amount.extra_amount"> <span class="lab_el_12"></span>
+                                    {{rc.DefaultCurrency.symbol}} {{(CDC.data.invoice.amount.total + CDC.service_tax + CDC.data.invoice.amount.extra_amount - CDC.data.invoice.amount.coupon)
+                                    * rc.DefaultCurrency.value | number:2}}</p>
+                                <p ng-if="!CDC.data.invoice.amount.extra_amount"> <span class="lab_el_12"></span>
+                                    {{rc.DefaultCurrency.symbol}} {{(CDC.data.invoice.amount.total + CDC.service_tax - CDC.data.invoice.amount.coupon)
+                                     * rc.DefaultCurrency.value | number:2}}</p>
+                                <!--<p ng-if="CDC.couponbtn == 0"> <span class="lab_el_12" ng-if="CDC.couponbtn == 0"></span> {{rc.DefaultCurrency.symbol}}  {{CDC.grandtotal  * rc.DefaultCurrency.value | number:2}}</p>-->
+                            </div>
+
+                            <div class="form-group amt-tag" ng-if="CDC.data.payment_type == 'wallet-other'">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'PARTIALLY PAID'|translate}} :</span>
+                                </label>
+                                <p> <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}} {{(CDC.data.invoice.amount.grand_total - CDC.data.invoice.amount.balance_amount)
+                                    * rc.DefaultCurrency.value | number:2}}</p>
+                            </div>
+
+                            <div class="form-group amt-tag">
+                                <label for="line1">
+                                    <span class="lab_el_12"> {{'AMOUNT TO PAY'|translate}}</span>
+                                </label>
+                                <!-- Payment Without Coupon-->
+                                <p ng-if="!CDC.data.invoice.amount.coupon && CDC.data.payment_type != 'wallet-other'">
+                                    <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}}
+                                    {{CDC.data.invoice.amount.grand_total * rc.DefaultCurrency.value | number:2}}</p>
+                                <!-- Payment With Coupon-->
+                                <p ng-if="CDC.data.invoice.amount.coupon && CDC.data.payment_type != 'wallet-other'">
+                                    <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}}
+                                    {{CDC.data.invoice.amount.balance_amount * rc.DefaultCurrency.value | number:2}}</p>
+                                <!-- Partial Payment Without Coupon-->
+                                <p ng-if="!CDC.data.invoice.amount.coupon && CDC.data.payment_type == 'wallet-other'">
+                                    <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}}
+                                    {{CDC.data.invoice.amount.balance_amount * rc.DefaultCurrency.value | number:2}}</p>
+                                <!-- Partial Payment With Coupon-->
+                                <p ng-if="CDC.data.invoice.amount.coupon && CDC.data.payment_type == 'wallet-other'">
+                                    <span class="lab_el_12"></span> {{rc.DefaultCurrency.symbol}}
+                                    {{CDC.data.invoice.amount.balance_amount * rc.DefaultCurrency.value | number:2}}</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="line1"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="conf-divs copuon-cde">
+                    <h3>{{'COUPONS' | translate}}</h3>
+                    <!-- ng-if="!CDC.data.invoice.amount.coupon" -->
+                    <div class="form-group"
+                        ng-if="CDC.data.invoice.amount.grand_total == CDC.data.invoice.amount.balance_amount">
+                        <label for="line1">{{'DO YOU HAVE COUPON'|translate}} ? </label>
+                        <input name="coupon " type="text" ng-model="CDC.coupon">
+                        <input ng-if="CDC.couponbtn == 1" class="couponbtn" value="{{'APPLY' | translate}}"
+                            ng-click="CDC.applyCoupon(CDC.coupon)" type="submit">
+                        <!--   <input ng-if="CDC.couponbtn == 0" class="couponbtn" value="{{'REMOVE' | translate}}" ng-click="CDC.removeCoupon(CDC.coupon)"
+                            type="submit"> -->
+                        <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}"
+                            dismiss-on-timeout="{{alertTimeout}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+                    </div>
+
+                    <div class="form-group" ng-if="CDC.data.invoice.amount.coupon">
+                        <label for="line1"
+                            ng-if="CDC.data.invoice.amount.coupon != 0">{{'COUPON ALREADY USED'|translate}}</label>
+                    </div>
+
+                </div>
+
+                <div class="pay-meth">
+                    <ul class="wallet-mny" ng-if="CDC.grandtotal != 0.00">
+                        <li ng-repeat="(key , PayType) in CDC.paymentmode">
+                            <input ng-disabled="CDC.data.invoice.status == 1" type="radio"
+                                ng-click="CDC.payemntvalue(PayType.code)" id="option{{key}}" name="type" ng-model="type"
+                                value="{{PayType.code}}">
+                            <label for="option{{key}}">{{PayType.name | translate}}</label>
+                            <div class="check"></div>
+                        </li>
+                    </ul>
+                    <ul class="wallet-mny" ng-if="CDC.grandtotal == 0.00">
+                        <input class="bluebtn marginsds" value="{{'COMPLETE YOUR TASK' | translate}}"
+                            ng-click="CDC.couponCompltePayment(CDC.data)" type="submit">
+                    </ul>
+                </div>
+
+                <form name="taskConfirmForm" submit-validate no-validate ng-show=" CDC.type == 'stripe' ">
+                    <div class="dopayment" ng-if="CDC.paymentStatus != 'completed'">
+                        <div class="conf-divs">
+                            <h3>{{'PAYMENT'|translate}}</h3>
+                            <div class="conf-white">
+                                <ul class="credicard-detls">
+                                    <li>
+                                        <label class="mobl-dis">{{'CREDIT CARD'|translate}}
+                                            {{stripeError|translate}}</label>
+                                        <input required name="card_number" ng-minlength="16"
+                                            ng-model="CDC.taskPayment.card.number" ng-maxlength="16" class="mobilenumb"
+                                            placeholder="" type="text" maxlength="16">
+                                        <div>
+                                            <span class="validerr"
+                                                ng-show="taskConfirmForm.card_number.$invalid && !taskConfirmForm.card_number.$pristine">{{'PLEASE CHECK CARD NUMBER' | translate}}</span>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="Experitaiton">
+                                            <label>{{'EXPIRATION'|translate}}</label>
+                                            <select required name="exp_month" ng-model="CDC.taskPayment.card.exp_month">
+                                                <option value="">{{'SELECT THE MONTH' | translate}}</option>
+                                                <option checked="checked" value="01">01</option>
+                                                <option value="02">02</option>
+                                                <option value="03">03</option>
+                                                <option value="04">04</option>
+                                                <option value="05">05</option>
+                                                <option value="06">06</option>
+                                                <option value="07">07</option>
+                                                <option value="08">08</option>
+                                                <option value="09">09</option>
+                                                <option value="10">10</option>
+                                                <option value="11">11</option>
+                                                <option value="12">12</option>
+                                            </select>
+                                            <select required name="exp_year" ng-model="CDC.taskPayment.card.exp_year">
+                                                <option value="">{{'SELECT THE YEAR' | translate}}</option>
+                                                <option value="2019">2019</option>
+                                                <option value="2020">2020</option>
+                                                <option value="2021">2021</option>
+                                                <option value="2022">2022</option>
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025">2025</option>
+                                                <option value="2025">2026</option>
+                                            </select>
+                                        </div>
+                                        <div class="Experitaiton">
+                                            <label>{{'CVV CODE'|translate}}</label>
+                                            <input required name="cvc" ng-minlength="3" ng-maxlength="4" type="text"
+                                                ng-model="CDC.taskPayment.card.cvv">
+                                        </div>
+                                    </li>
+                                    <span style="color:red"
+                                        ng-show="taskConfirmForm.exp_month.$invalid && !taskConfirmForm.exp_month.$pristine"> {{'EXPIRATION MONTH IS REQUIRED'
+| translate}}.</span>
+                                    <span style="color:red" ng-bind="stripeError">{{stripeError|translate}}</span>
+                                    <span style="color:red"
+                                        ng-show="taskConfirmForm.exp_year.$invalid && !taskConfirmForm.exp_year.$pristine">
+                                        {{'EXPIRATION YEAR IS REQUIRED' | translate}}.</span>
+                                    <span style="color:red"
+                                        ng-show="taskConfirmForm.cvc.$invalid && !taskConfirmForm.cvc.$pristine">
+                                        {{'CVV CODE IS REQUIRED' | translate}}.</span>
+                                </ul>
+                            </div>
+                        </div>
+                        <div id="dopaymentcredit">
+                            <input class="bluebtn marginsds" ng-if="doPayment === true"
+                                value="{{'CARD PAYMENT' | translate}}"
+                                ng-click="CDC.payment(taskConfirmForm.$valid,CDC.taskPayment)" type="submit">
+                            <button class="bluebtn marginsds" ng-if="doPayment === false"><span
+                                    class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Processing...</button>
+                        </div>
+                    </div>
+                </form>
+                <div ng-show=" CDC.type == 'wallet' ">
+                    <input class="bluebtn marginsds" value="{{'WALLET PAYMENT' | translate}}"
+                        ng-click="CDC.walletpayment(CDC.data,CDC.couponbtn)" type="submit" ng-if="doPayment === true">
+                    <button class="bluebtn marginsds" ng-if="doPayment === false"><span
+                            class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Processing...</button>
+                </div>
+                <div ng-show=" CDC.type == 'paypal' ">
+                    <input class="bluebtn marginsds" value="{{'PAYPAL PAYMENT' | translate}}"
+                        ng-click="CDC.paypalPayment(CDC.data)" type="submit" ng-if="doPayment === true">
+                    <button class="bluebtn marginsds" ng-if="doPayment === false"><span
+                            class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        Processing...</button>
+
+                </div>
+                <div class="dopayment" ng-if="CDC.paymentStatus == 'completed'">
+                    <div class="conf-divs">
+                        <div class="conf-white"
+                            style="text-align: center; padding: 100px; font-size: 30px; color: #429802;">
+                            {{'PAYMENT COMPLETED'|translate}}
+                        </div>
+                    </div>
+                </div>
+                <div class="dopayment" ng-if="CDC.paymentStatus == 'Wallet money over' ">
+                    <div class="conf-divs">
+                        <div class="conf-white"
+                            style="text-align: center; padding: 100px; font-size: 25px; color: #f22626;">
+                            {{'TRANSACTION PARTIALLY COMPLETED DUE TO INSUFFICENT BALANCE'|translate}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+</section>

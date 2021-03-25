@@ -1,0 +1,21 @@
+<div class="modal-body ng-scope col-sm-12 modal-footer" style="display : inline-block;margin-bottom: 40px;text-align: left;">
+  <form role="form" name="mailForm" submit-validate novalidate>
+    <div class="tile-body">
+      <div class="form-group">
+            <label for="exampleInputEmail1">Subject</label>
+            <input type="text" name="subject" id="subject" class="form-control" ng-model="ETMC.mail.subject" placeholder="Mail Subject" required>
+            <span  class="validerr tsk-valids" ng-show="mailForm.subject.$invalid && !mailForm.subject.$pristine">Subject is required.</span>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Message</label>
+        <textarea class="form-control" rows="7" name="message" id="message" ng-model="ETMC.mail.message" placeholder="Mail Content" required></textarea>
+        <span  class="validerr tsk-valids" ng-show="mailForm.message.$invalid && !mailForm.message.$pristine">Message is required.</span>
+      </div>
+      <div class="form-group" style="text-align: right;">
+        <button class="btn btn-lightred btn-ef btn-ef-4 btn-ef-4c" ng-click="ETMC.cancel()"><i class="fa fa-arrow-left"></i> Cancel</button>
+        <button class="btn btn-success btn-ef btn-ef-3 btn-ef-3c" ng-click="ETMC.send(mailForm.$valid, ETMC.mail)"><i class="fa fa-arrow-right"></i>Send</button>
+      </div>
+    </div>
+  </form>     
+</div>
+

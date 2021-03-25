@@ -1,0 +1,33 @@
+<div class="modal-header view-mod-head">
+    <h3 class="modal-title">Edit {{'DOCUMENT' | translate}}</h3>
+</div>
+<div class="modal-body view-mod-sec">
+    <form class="document-forms" name="documenttaskerForm" enctype="multipart/form-data" submit-validate novalidate>
+        <div class="main_cont final-sect">
+            <div class="form-group" ng-class="{ 'has-error' : documenttaskerForm.docname.$invalid && !documenttaskerForm.docname.$pristine, 'has-success' : documenttaskerForm.docname.$valid && !documenttaskerForm.docname.$pristine}">
+                <input ui-jq="filestyle"  type="file" ng-model="DCM.docname" name="docname" ngf-max-size="1MB" ngf-pattern="'image/jpg,image/jpeg,image/png,application/pdf,.doc,.docx'" ngf-model-invalid="errorFiles" class="filestyle"
+                ui-options="{ buttonText: 'Select file', iconName: 'fa fa-inbox'}" id="docname" ngf-select="DCM.updateTaskerDocument(DCM.docname)" ngf-change="DCM.loadFile($event)" required>
+                <label class="file-but">
+                    <span class="file-sec">
+                        {{'CHOOSE FILE' | translate}}
+                    </span>
+                    <span class="file-name-cnt" ng-if="!DCM.docname.name">{{'NO FILE CHOSEN' | translate}}</span>
+                    <span class="file-name-cnt">{{DCM.docname.name}}</span>
+                </label>
+                <p class="help-block">
+                   <span ng-if="!documenttaskerForm.docname.$error.pattern && documenttaskerForm.docname.$error.maxSize" ng-style="{'color':'red'}">
+                        {{'MAX FILE SIZE 1MB' | translate}}
+                    </span>
+                    <span ng-show="documenttaskerForm.docname.$error.pattern" ng-style="{'color':'red'}">
+                        {{'ALLOWED FILES: JPEG, JPG, PNG, PDF, DOC, DOCX' | translate}}
+                    </span>
+                </p>
+                <img id="output" style="height:100%; width:100%"/>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" type="submit" ng-click="DCM.ok(documenttaskerForm.docname.$valid)">{{'OK' | translate}}</button>
+    <button class="btn btn-warning" type="button" ng-click="DCM.cancel()">{{'CANCEL' | translate}}</button>
+</div>

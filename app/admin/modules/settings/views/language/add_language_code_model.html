@@ -1,0 +1,29 @@
+<div class="modal-header">
+    <h3 class="modal-title">Add Language</h3>
+</div>
+<form name="AddLanguageForm" submit-validate ng-submit="ALC.ok(AddLanguageForm.$valid)" role="form" novalidate>
+    <div class="modal-body">
+        <div class="row">
+            <label class="col-md-4">Content</label>
+            <div class="form-group col-md-12" ng-class="{ 'has-error' : AddLanguageForm.langkey.$invalid && !AddLanguageForm.langkey.$pristine, 'has-success' : AddLanguageForm.langkey.$valid && !AddLanguageForm.langkey.$pristine}">
+                <input name="langkey" ng-model="ALC.languagekey" class="form-control" type="text" on-blur-validation
+                    required />
+                <p class="help-block">
+                    <span ng-show="AddLanguageForm.langkey.$invalid && !AddLanguageForm.langkey.$pristine"> Language
+                        Name is
+                        required.</span>
+                </p>
+            </div>
+        </div>
+        <div class="row" ng-repeat="value in ALC.languages track by $index">
+            <label class="col-md-4">{{value.name | capitalize}}</label>
+            <div class="form-group col-md-12">
+                <input name="lang{{$index}}" ng-model="ALC.finallanguage[$index].value" ng-blur="ALC.refresh ? ALC.refreshChange(ALC.finallanguage[$index].value) : null" class="form-control" type="text" on-blur-validation />
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">ADD</button>
+        <button type="button" class="btn btn-warning" ng-click="ALC.cancel()">Cancel</button>
+    </div>
+</form>

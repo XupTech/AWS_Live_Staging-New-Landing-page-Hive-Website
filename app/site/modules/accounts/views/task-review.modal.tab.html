@@ -1,0 +1,23 @@
+<form name="Taskerreview">
+<div class="modal-header">
+    <h3 class="modal-title">{{'REVIEW' | translate}}</h3>
+</div>
+
+<div class="modal-body" ng-class="{ 'has-error' : Taskerreview.$invalid && !Taskerreview.$pristine, 'has-success' : Taskerreview.$valid && !Taskerreview.$pristine}">
+   <div class="form-group">
+        <label for="line1">{{'RATE YOUR USER FOR THIS TASK' | translate}} ? </label></br>
+        <uib-rating ng-model="TREMS.review.rating" max="5" state-on="'fa fa-star text-orange text-lg'" state-off="'fa fa-star-o text-lg'"></uib-rating>
+        <label  ng-show="Taskerreview.rating.$invalid && !Taskerreview.rating.$pristine">{{'RATING IS REQUIRED' | translate}}</label>
+    </div>
+    <div class="form-group">
+        <label for="line1">{{'COMMENTS' | translate}}</label>
+        <textarea type="text" class="form-control" ng-model="TREMS.review.comments"></textarea>
+        <p ng-show="Taskerreview.comment.$invalid && !Taskerreview.comment.$pristine" class="help-block">{{'RATING COMMENT SHOULD BE MIN 200 CHAR' | translate}}</p>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" type="button" ng-click="TREMS.ok()">{{'OK' | translate}}</button>
+    <button class="btn btn-warning" type="button" ng-click="TREMS.cancel()">{{'CANCEL' | translate}}</button>
+</div>
+</form>

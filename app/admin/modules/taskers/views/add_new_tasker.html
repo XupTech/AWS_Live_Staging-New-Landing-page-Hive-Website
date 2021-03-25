@@ -1,0 +1,393 @@
+<div class="page page-form-wizard">
+  <!-- page header -->
+  <div class="pageheader">
+    <h2>{{'Menu.TASKERS' | translate}}</h2>
+    <div class="page-bar">
+      <ul class="page-breadcrumb">
+        <li>
+          <a ui-sref="app.dashboard">
+            <i class="fa fa-home"></i> {{main.title}}</a>
+        </li>
+        <li>
+          <a ui-sref="app.taskers.list">{{'SubMenu.TASKER_LIST' | translate}}</a>
+        </li>
+        <li>
+          <a ui-sref="app.taskers.add">{{'SubMenu.ADD_NEW_TASKER' | translate}}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- /page header -->
+
+  <!-- page content -->
+  <div class="pagecontent">
+    <tabset class="tab-animation tab-container tab-wizard" justified="true" set-ng-animate="true" ng-init="steps={step1:true, step2:false, step3:false, step4:false, step5:false}">
+      <tab active="steps.step1">
+        <tab-heading>
+          Personal Information
+          <span class="badge badge-default pull-right wizard-step">1</span>
+        </tab-heading>
+        <form name="step1" role="form" submit-validate enctype="multipart/form-data" class="form-validation" novalidate>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="firstname">First Name </label>
+              <input type="text" name="firstname" id="firstname" class="form-control" ng-model="ANTSC.tasker.firstname" ng-maxlength="25"
+                ng-pattern="/^[a-zA-Z0-9\_\. ]*$/" required disallow-spaces>
+              <p class="help-block">
+                <span ng-show="step1.firstname.$invalid && !step1.firstname.$pristine">First Name is required.</span>
+                <span ng-show="step1.firstname.$error.maxlength">First Name is too long.</span>
+                <span ng-show="step1.firstname.$error.pattern">Allow Only Dot, Underscore And Characters.</span>
+
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="lastname">Last Name </label>
+              <input type="text" name="lastname" id="lastname" class="form-control" ng-model="ANTSC.tasker.lastname" ng-maxlength="25"
+                ng-pattern="/^[a-zA-Z0-9\_\. ]*$/" required disallow-spaces>
+              <p class="help-block">
+                <span ng-show="step1.lastname.$invalid && !step1.lastname.$pristine">Last Name is required.</span>
+                <span ng-show="step1.lastname.$error.maxlength">Last Name is too long.</span>
+                <span ng-show="step1.lastname.$error.pattern">Allow Only Dot, Underscore And Characters.</span>
+
+              </p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : step1.gender.$invalid && !step1.gender.$pristine, 'has-success' : step1.gender.$valid && !step1.gender.$pristine}">
+              <label for="gender" class="control-label">Gender</label>
+              <select type="text" name="gender" id="gender" class="form-control" ng-model="ANTSC.tasker.gender" required>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="none">Rather Not say</option>
+              </select>
+              <p class="help-block">
+                <span ng-show="step1.gender.$invalid && !step1.gender.$pristine">gender is required.</span>
+              </p>
+            </div>
+            <div class="form-group  col-sm-6" ng-class="{ 'has-error' : step1.DOB.$invalid && !step1.DOB.$pristine, 'has-success' : step1.DOB.$valid && !step1.DOB.$pristine}">
+              <label class="control-label">DOB</label>
+              <div class="input-group w-md">
+                <input type="text" name="DOB" class="form-control" datepicker-popup="{{format}}" ng-change="ANTSC.dateChange()" ng-model="ANTSC.dob"
+                  is-open="status.opened" max-date="maxDate" datepicker-options="dateOptions" ng-required="true" close-text="Close"
+                />
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="open($event)">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                  </button>
+                </span>
+              </div>
+              <p class="help-block">
+                <span class="validerr" ng-show="step1.DOB.$invalid && !step1.DOB.$pristine">DOB is required.</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : step1.email.$invalid && !step1.email.$pristine, 'has-success' : step1.email.$valid && !step1.email.$pristine}">
+              <label for="email" class="control-label">E-mail</label>
+              <input type="email" name="email" ng-model="ANTSC.tasker.email" id="email" class="form-control" required ng-pattern="/^[_a-zA-Z0-9]+(\.[_a-zA-Z0-9]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,10})$/">
+              <p class="help-block">
+                <span ng-show="step1.email.$error.required && !step1.email.$pristine">Email is required.</span>
+                <span class="validerr" ng-show="!step1.email.$error.required && step1.email.$error.pattern">Invalid email id.</span>
+              </p>
+            </div>
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : step1.tel.$invalid && !step1.tel.$pristine, 'has-success' : step1.tel.$valid && !step1.tel.$pristine}">
+              <label for="phone" class="control-label">Phone</label>
+              <input type="text" name="tel" required id="tel" class="form-control" ng-model="ANTSC.tasker.phone" required ng-intl-tel-input>
+                <span class="validerr" ng-show="step1.tel.$invalid && !step1.tel.$pristine">Phone is required.</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-sm-6" ng-class="{ 'has-error' : step1.avatar.$invalid && !step1.avatar.$pristine, 'has-success' : step1.avatar.$valid && !step1.avatar.$pristine}">
+              <label for="avatar">Profile Picture </label>
+              <input ui-jq="filestyle" type="file" ngf-change="handleFileSelect($files, $event, $rejectedFiles);" ngf-select="temp=true"
+                ngf-pattern="'image/*'" accept="image/*" name="avatar" value="Upload" ngf-max-size="1MB" ngf-model-invalid="errorFiles"
+                class="filestyle" ui-options="{ buttonText: 'Select file', iconName: 'fa fa-inbox'}" id="avatar" checkFileSize err-src>
+              <span 
+              ng-style="{
+                  'color': step1.avatar.$invalid || step1.avatar.$error.pattern || step1.avatar.$error.maxSize ? 'red' : 'black'
+              }"
+              >
+                {{'Allowed files: jpeg, png, jpg. Max file size 1Mb' | translate}}
+              </span>
+            </div>
+          </div>
+          <!--- Croping -->
+          <div class="row m-10" ng-if="showImage">
+            <div class="p-10 bg-white b-a b-solid inline-block crp_img">
+              <img style="max-width: 100% !important; width: 150px; " ngf-src="ANTSC.myCroppedImage">
+            </div>
+          </div>
+          <div class="tcol row col-sm-8" ng-if="visibleValue && !step1.avatar.$error.maxSize">
+            <label for="avatar">Image Crop</label>
+            <div class="p-15">
+              <div class="row">
+                <div class="p-10 bg-white b-a b-solid " style="height:320px">
+                  <img-crop image="myImage" result-image="ANTSC.myCroppedImage" result-image-size="160" area-type="square"></img-crop>
+                </div>
+              </div>
+              <div class="row mt-10" ng-show="visibleValue">
+                <div class="p-10 bg-white b-a b-solid inline-block crp_img">
+                  <img ng-src="{{ANTSC.myCroppedImage}}" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--- Croping -->
+          <!-- </form> -->
+
+          <div class="row">
+            <div class="form-group col-sm-12">
+              <button class="btn btn-default pull-right" type="submit" class="btn btn-default" ng-click="ANTSC.submitTaskertData(step1.$valid,ANTSC.tasker,steps)">Next</button>
+            </div>
+          </div>
+        </form>
+      </tab>
+	  
+      <tab active="steps.step2" disable="step1.$invalid">
+        <tab-heading>
+          About 
+          <span class="badge badge-default pull-right wizard-step">2</span>
+        </tab-heading>
+        <form name="step2" role="form" novalidate>
+          <span>PROFILE</span>
+          <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="{{alertTimeout}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+
+          <div class="lop-div-task" ng-repeat="profileinfo in ANTSC.getQuestion">
+            <span class="topedtext">{{profileinfo.question}}</span>
+            <div class="botom-fuls" style="margin-top:10px">
+              <ul class="radio-live">
+                <li>
+                  <textarea rows="4" cols="90" style="resize:vertical;" ng-model="ANTSC.profileDetails[profileinfo._id]"></textarea>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <br>
+          <button type="submit" class="btn btn-default" ng-click="steps.step1=true">Previous</button>
+          <button type="submit" class="btn btn-default pull-right" ng-click="ANTSC.saveProf(step2.$valid,profileDetails,steps);">Next</button>
+        </form>
+      </tab>
+
+
+      <!-- ============add============== -->
+
+
+      <tab active="steps.step3" disable="!steps.step3">
+        <tab-heading>
+          Category 
+          <span class="badge badge-default pull-right wizard-step">3</span>
+        </tab-heading>
+        <form name="step3" submit-validate role="form" enctype="multipart/form-data" novalidate>
+          <div class="row">
+
+            <div class="form-group col-md-12 legend">
+              <div style="float: left; width: 80%;">
+                <h4>
+                  <strong>Category</strong> Settings</h4>
+              </div>
+              <div class="account-section" style="float: right; width: 20%;">
+                <button type="button" class="btn btn-success" ng-click="ANTSC.categoryModal()">Add Category</button>
+
+              </div>
+              <p>Your Category</p>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" dismiss-on-timeout="{{alertTimeout}}" close="closeAlert($index)">{{alert.msg}}</uib-alert>
+            <div class="category-details" ng-repeat="category in ANTSC.addnewcategories track by $index">
+              <div class="col-md-6" style="text-align-last: left;">
+                <h4 class="category">{{category.name}}</h4>
+              </div>
+              <div class="col-md-6" style="text-align-last: left;margin-top: 10px;">
+                <button type="button" title="Remove" class="btn btn-rounded-20 btn-default btn-sm" ng-click="ANTSC.deletecategoryitem(category._id)"
+                  style="width:30px;">
+                  <i class="fa fa-trash" style="margin-left: -2px;"></i>
+                </button>
+              </div>
+
+            </div>
+          </div>
+          <button type="submit" class="btn btn-default" ng-click="steps.step2=true">Previous</button>
+          <button type="submit" ng-disabled="ANTSC.tasker.taskerskills.length==0" class="btn btn-default pull-right" ng-click="ANTSC.addNewCategory(step3.$valid,ANTSC.tasker,steps)">Next</button>
+        </form>
+      </tab>
+      <tab active="steps.step4" disable="!steps.step4"> 
+          <tab-heading>
+            Availability
+            <span class="badge badge-default pull-right wizard-step">4</span>
+          </tab-heading>
+
+          <form name="step4" role="form" submit-validate novalidate>
+
+            <div class="wrap-reset">
+                <label>
+                  Select business days/hours
+                </label>
+                <div>
+                  <uib-accordion close-others="oneAtATime">
+                    <div class="date_whl_day" style="margin-left: 536px; margin-bottom: 10px;">
+                      <span class="date_whl_input">
+                        <input ng-change="selectWholeweek(ANTSC.wholeweek)" type="checkbox" name="wholeweek" ng-model="ANTSC.wholeweek"/>
+                      </span>
+                      <label>
+                        Whole Week
+                      </label>
+                    </div>
+                    <div uib-accordion-group class="panel-default actives" ng-repeat="(parentkey, days) in ANTSC.tasker.working_days" is-open="days.selected && !days.wholeday">
+                      <uib-accordion-heading>
+                        <div class="date_acrd">
+                        <span class="date_acrd_input">
+                          <input type="checkbox" name="" ng-model="days.selected" ng-click="$event.stopPropagation()" ng-change="changeWholeweek()">
+                        </span>
+                        <label>
+                          {{days.day}}  
+                        </label>
+                        </div>
+                        <div class="date_whl_day" ng-if="days.selected">
+                         <span class="date_whl_input">
+                          <input type="checkbox" name="wholeday" ng-model="days.wholeday" ng-click="clearSlots(days.selected, days.wholeday, parentkey, $event)" ng-change="changeWholeweek()">
+                        </span>
+                        <label>
+                          Whole day 
+                        </label>
+                        </div>
+                      </uib-accordion-heading>
+                      <div class="timings">
+                        <div class="time_value" ng-repeat="(key, slot) in ANTSC.tasker.working_days[parentkey].slot">
+                            <input type="checkbox" id="sl{{parentkey}}{{key}}" name ="sl{{parentkey}}{{key}}" ng-model="ANTSC.tasker.working_days[parentkey].slot[key].selected" />
+                            <label for="{{slot.time}}">{{slot.time}}</label>
+                        </div>
+                      </div>
+                    </div>     
+                  </uib-accordion>
+                </div> 
+                
+              <label class="sublin-hea">Availability Location</label>
+              <br>
+              <input name="taskerarea" class="form-control" required type="text" places-auto-complete size=80 ng-model="ANTSC.taskerareaaddress"
+                types="['address']" ng-change="ANTSC.emptyLatLng(ANTSC.temp_taskerareaaddress)" on-place-changed="ANTSC.taskerareaChanged(ANTSC.taskerareaaddress)"
+                style="width: 61%;" />
+            </div>
+            <br>
+
+            <div class="lop-div-task">
+               <input class="form-control" name="taskerarea" required type="hidden" min="1" max="6371" ng-model="ANTSC.tasker.radius" on-blur-validation
+                    allow-only-numbers>
+              <div class="lop-div-task">
+                <ng-map id="foo" center="[{{ANTSC.tasker.location.lat}},{{ANTSC.tasker.location.lng}}]" zoom="8" mayTypeId="TERRAIN">
+                  <shape id="circle" name="circle" centered="true" stroke-color='#FF0000' stroke-opacity="0.8" stroke-weight="2" center="[{{ANTSC.tasker.location.lat}},{{ANTSC.tasker.location.lng}}]"
+                    radius="{{ANTSC.tasker_radius * ANTSC.radiusval}}" on-radius_changed="ANTSC.mapToInput()" on-center_changed="ANTSC.mapToInput()"
+                    editable="false"></shape>
+                </ng-map>
+              </div>
+
+            </div>
+            <button type="submit" class="btn btn-default" ng-click="steps.step3=true">Previous</button>
+            <button type="submit" ng-if="ANTSC.settings.document_upload.status == 1" ng-disabled="ANTSC.tasker.working_days.length==0" class="btn btn-default pull-right" ng-click="ANTSC.newsaveAvail()">Next</button>
+            <button type="submit" ng-if="ANTSC.settings.document_upload.status != 1" ng-disabled="ANTSC.tasker.working_days.length==0" class="btn btn-default pull-right" ng-click="ANTSC.newsaveAvail()">Finish</button>
+          </form>
+      </tab>
+
+      <!--- Tasker Documents -->
+      <tab ng-if="ANTSC.settings.document_upload.status == 1" active="steps.step5" disable="step4.$invalid"> 
+        <tab-heading>
+          Tasker Documents
+          <span class="badge badge-default pull-right wizard-step">5</span>
+        </tab-heading>
+        <form name="step5" role="form" novalidate>
+          <div class="wrap-reset">
+          <div class="form-group" ng-class="{ 'has-error' : step5.document.$invalid && !step5.document.$pristine, 'has-success' : step5.document.$valid && !step5.document.$pristine}">
+                <label class="control-label">Documents List</label>
+                <ul> 
+                  
+                  <li class="form-group"  ng-repeat="docs in ANTSC.taskerdocument">
+                    <label class="form-group" for = docs.name>{{docs.name}}</label>
+                    <input ui-jq="filestyle"  type="file" 
+                    ngf-select="ANTSC.uploadDocument(step5.name.$valid, ANTSC[docs.name], docs.name)" ng-model="ANTSC[docs.name]" name="{{docs.replace_name}}" ngf-max-size="1MB" ngf-pattern="'image/jpg,image/jpeg,image/png,application/pdf,.doc,.docx'" ngf-model-invalid="errorFiles" class="filestyle"
+                    ui-options="{ buttonText: 'Select file', iconName: 'fa fa-inbox'}" id="{{docs.name}}" required>
+                    <div class="form-group" ng-class="{ 'has-error' : step5.{{docs.name}}.$invalid && !step5.{{docs.name}}.$pristine, 'has-success' : step5.{{docs.name}}.$valid && !step5.{{docs.name}}.$pristine}">
+                    <p class="help-block">
+                       <span class="help-block" style="color:red" ng-show="!step5.{{docs.replace_name}}.$pristine && step5.{{docs.replace_name}}.$error.pattern">Allowed File Size Should Be Lesser Than 1 MB.</span>    
+                       <span style="color:red" ng-show="!step5.{{docs.replace_name}}.$pristine && step5.{{docs.replace_name}}.$error.maxSize">Allowed Files: JPEG, JPG, PNG, PDF, DOC, DOCX.</span>
+                       <span class="help-block" style="color:red" ng-show="!step5.{{docs.replace_name}}.$pristine && !step5.{{docs.replace_name}}.$error.maxSize && !step5.{{docs.replace_name}}.$error.pattern && step5.{{docs.replace_name}}.$error.required">{{docs.name}} is required</span>
+                    </p>
+                    </div>
+                </li>
+
+               </ul>
+          </div>
+
+          <button type="submit" class="btn btn-default" ng-click="steps.step4=true">Previous</button>
+          <button type="submit" ng-disabled="step5.$invalid" disabled="step5.$invalid" 
+            class="btn btn-success pull-right" ng-click="ANTSC.savedocuments(true,ANTSC.tasker.working_days)">Finish</button>
+        </div>
+        </form>
+      </tab>
+	  </tabset>
+	</div>
+</div>
+<style>
+  .category-details {
+    width: 100%;
+    float: left;
+  }
+
+  .category {
+    font-size: 19px;
+    margin-bottom: 0;
+    margin-left: 15px;
+    margin-right: 0px;
+    padding: 0px 0px 0px 0px;
+  }
+
+  .stripe-connect {
+    display: inline-block;
+    margin-bottom: 1px;
+    background-image: -webkit-linear-gradient(#28a0e5, #015e94);
+    background-image: linear-gradient(#28a0e5, #015e94);
+    -webkit-font-smoothing: antialiased;
+    border: 0;
+    padding: 1px;
+    height: 30px;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, .2);
+    cursor: pointer;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    text-decoration: none!important;
+  }
+
+  .stripe-connect span {
+    display: block;
+    position: relative;
+    padding: 0 12px;
+    height: 30px;
+    background: #1275ff;
+    background-image: -webkit-linear-gradient(#7dc5ee, #008cdd 85%, #30a2e4);
+    background-image: linear-gradient(#7dc5ee, #008cdd 85%, #30a2e4);
+    font-size: 14px;
+    line-height: 30px;
+    color: #fff;
+    font-weight: 700;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, .2);
+    box-shadow: inset 0 1px 0 hsla(0, 0%, 100%, .25);
+    border-radius: 3px;
+  }
+
+  .btn.btn-sm.btn-danger {
+    margin-left: 10px;
+  }
+
+  Inherited from a.stripe-connect #foo {
+    height: 250px
+  }
+</style>

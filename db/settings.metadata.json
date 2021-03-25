@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"hfainstallation13092019.settings"},{"v":2,"unique":true,"key":{"alias":1},"name":"alias_1","ns":"hfainstallation13092019.settings","background":true}]}

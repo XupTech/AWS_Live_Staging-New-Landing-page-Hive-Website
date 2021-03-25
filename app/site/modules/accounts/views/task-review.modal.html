@@ -1,0 +1,24 @@
+<form name="Taskerreview" submit-validate novalidate>
+<div class="modal-header">
+    <h3 class="modal-title">{{'REVIEW'|translate }}</h3>
+</div>
+<div class="modal-body">
+   <div class="form-group">
+        <label for="line1">{{'RATE YOUR USER FOR THIS TASK' | translate}} ?</label></br>
+        <uib-rating name="rating" ng-model="TREM.review.rating" max="5" state-on="'fa fa-star text-orange text-lg'" state-off="'fa fa-star-o text-lg'"  on-blur-validation required ></uib-rating>
+        <p style="color:red" class="help-block" ng-show="Taskerreview.rating.$invalid && !Taskerreview.rating.$pristine && Taskerreview.rating.$error.required">{{'RATING IS REQUIRED' | translate}}</p>
+    </div>
+    <div class="form-group" >
+        <label for="line1">{{'COMMENTS'|translate }}</label>
+        <textarea type="text" class="form-control" ng-model="TREM.review.comments" ng-maxlength="200" name="comment"   on-blur-validation required ></textarea>
+        <p style="color:red" ng-show="Taskerreview.comment.$invalid && !Taskerreview.comment.$pristine && !Taskerreview.comment.$error.required" class="help-block">{{'RATING COMMENT SHOULD BE MIN 200 CHAR' | translate}}</p>
+        <p style="color:red" ng-show="Taskerreview.comment.$error.required && !Taskerreview.comment.$pristine" class="help-block">{{'COMMENT IS REQUIRED' | translate}}</p>
+		
+    </div>
+</div>
+
+<div class="modal-footer">
+ <button class="btn btn-primary" type="submit" ng-click="TREM.ok(Taskerreview.$valid)">{{'OK'|translate }}</button>
+    <button class="btn btn-warning" type="submit" ng-click="TREM.cancel()">{{'CANCEL'|translate }}</button>
+</div>
+</form>
