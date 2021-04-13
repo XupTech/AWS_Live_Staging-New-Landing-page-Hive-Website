@@ -131,6 +131,14 @@ module.exports = function (app, io, i18n) {
         app.post('/mobile/mailverification', ensureAuthorized, mobile_user.mailVerification);
         app.post('/mobile/submit-rattings', ensureAuthorized, middlewares.commonUpload('uploads/images/users/').single('file'), mobile_user.submitRattings);
 
+
+        // PIX
+        const PaymentController = require('../controller/mobile/PaymentController');
+        app.post('/mobile/payment/pix/charge',PaymentController.createCharge);
+        app.post('/mobile/payment/pix/notification-charge',PaymentController.createNotificationCharge);
+        app.post('/mobile/payment/pix/balance',PaymentController.checkBalance);
+        
+
         //--mobile--
         app.get('/mobile/mobile/failed', mobile.mfailed);
         app.get('/mobile/mobile/sucess', mobile.msucess);

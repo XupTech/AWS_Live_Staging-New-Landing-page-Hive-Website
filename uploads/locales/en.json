@@ -389,5 +389,10 @@
 	"Start": "Start",
 	"First Level": "First Level",
 	"Email Id already exists": "Email Id already exists",
-	"exp_month  is Required": "exp_month  is Required"
+	"exp_month  is Required": "exp_month  is Required",
+	"Name is Required": "Name is Required",
+	"CPF is Required": "CPF is Required",
+	"CNPJ is Required": "CNPJ is Required",
+	"valor  is Required": "valor  is Required",
+	"pagador is Required": "pagador is Required"
 }
