@@ -42,7 +42,7 @@
     "jsonwebtoken": "^8.1.0",
     "moment-timezone": "^0.5.14",
     "mongodb": "^3.6.3",
-    "mongoose": "^5.11.8",
+    "mongoose": "^5.12.3",
     "multer": "^1.3.0",
     "multiple-date-picker": "^2.1.6",
     "node-cron": "^1.2.1",
